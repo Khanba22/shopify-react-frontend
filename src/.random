@@ -1,0 +1,24 @@
+https://amusing-sunbird-key.ngrok-free.app/auth?shop=33-outofstock.myshopify.com
+
+https://33-outofstock.myshopify.com/admin/oauth/authorize?client_id=cd5f7c4be71a842e748bb116856c8360&scope=read_inventory,write_inventory&redirect_uri={redirect_uri}
+
+https://amusing-sunbird-key.ngrok-free.app/?shop=33-outofstock.myshopify.com
+{% if product.available == false %}
+  <div id="notify-me-form">
+    <form action="https://amusing-sunbird-key.ngrok-free.app/notify-me" method="post">
+      <label for="country_code">Country Code:</label>
+      <select name="country_code" id="country_code" required>
+        <option value="+91">+91 (India)</option>
+        <option value="+1">+1 (USA)</option>
+        <!-- Add more country codes as needed -->
+      </select>
+      <label for="mobile_number">Mobile Number:</label>
+      <input type="text" id="mobile_number" name="mobile_number" maxlength="10" required>
+      <input type="hidden" name="inventoryItemId" value="{{ product.variants.first.inventory_item_id }}">
+      <input type="hidden" name="productName" value="{{ product.title }}">
+      <input type="hidden" name="productUrl" value="{{ shop.url }}/products/{{ product.handle }}">
+      <input type="hidden" name="shop" value="{{ shop.myshopify_domain }}">
+      <button type="submit">Notify Me</button>
+    </form>
+  </div>
+{% endif %}
